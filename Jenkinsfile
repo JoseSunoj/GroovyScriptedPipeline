@@ -83,21 +83,20 @@ pipeline {
                         '''
                     }
                 }
-                post('Log Out') {
-                    always {
-                        sh 'docker logout'
-                    }
+            }
+            post('Log Out') {
+                always {
+                    sh 'docker logout'
                 }
             }
         }
-        post {
-            failure {
-                emailext body: 'Pipeline Job Failures. Please Find The Attached Report.', 
-                    compresslog: true, 
-                    subject: 'Pipeline Job Failure Info.', 
-                    to: params.MAIL_ID
-            }
+    }
+     post {
+        failure {
+            emailext body: 'Pipeline Job Failures. Please Find The Attached Report.', 
+                compresslog: true, 
+                subject: 'Pipeline Job Failure Info.', 
+                to: params.MAIL_ID
         }
-
     }
 }
