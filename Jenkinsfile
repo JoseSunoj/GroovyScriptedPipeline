@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
         CI = 'true'
-        GITHUB_REPO = 'JoseSunoj/ScriptedPipeline'
+        GITHUB_REPO = 'josesunoj/scriptedpipeline'
         ARTIFACTORY = 'sunojjose.jfrog.io'
         REGISTRY = 'sunojjose.jfrog.io/scripted-pipeline'
         ARTIFACTROY_ACCESS_KEY = credentials('artifactory-access-key')
