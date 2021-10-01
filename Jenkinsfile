@@ -81,7 +81,7 @@ pipeline {
                 stage('Login To Artifactory') {
                 
                     steps {
-                        sh 'echo $ARTIFACTROY_ACCESS_KEY | docker login --username=_ --password-stdin $ARTIFACTORY'
+                        sh 'echo $ARTIFACTROY_ACCESS_KEY_PSW | docker login $ARTIFACTORY -u $ARTIFACTROY_ACCESS_KEY_USR --password-stdin'
                     }
                 }
                 stage('Push Image to Artifactory') {
