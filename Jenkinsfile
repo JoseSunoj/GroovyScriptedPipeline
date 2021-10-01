@@ -27,10 +27,20 @@ pipeline {
            
             failFast true
             parallel {
-                stage('Unit Test') {
-                    steps {
-                         sh 'mvn test'
+                stage('Testing') {
+                    stages{
+                        stage('Unit Test') {
+                            steps {
+                                sh 'mvn clean test'
+                            }
+                        } 
+                        stage('Code Coverage') {
+                            steps {
+                                sh 'mvn clean verify'
+                            }
+                        }  
                     }
+                    
                 }
                 stage('Code Analysis') {
                     stages {
