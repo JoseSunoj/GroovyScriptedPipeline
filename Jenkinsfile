@@ -94,7 +94,7 @@ pipeline {
      post {
         failure {
             emailext body: 'Pipeline Job Failures. Please Find The Attached Report.', 
-                compresslog: true, 
+                compressLog: true, 
                 subject: 'Pipeline Job Failure Info.', 
                 to: params.MAIL_ID
         }
