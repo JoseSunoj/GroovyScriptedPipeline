@@ -1,9 +1,7 @@
 pipeline {
     agent {
         node {
-            label {
-                'maven'
-            }
+            label 'maven'    
         }
     }
     environment {
@@ -58,9 +56,7 @@ pipeline {
         stage("Build and Push Image to Artifactory") {
             agent {
                 node {
-                    label {
-                        'docker'
-                    }
+                    label 'docker' 
                 } 
             }
             when {
