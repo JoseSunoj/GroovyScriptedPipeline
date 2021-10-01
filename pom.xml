@@ -64,8 +64,8 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
           <configuration>
-			<release>11</release>
-		  </configuration>
+			   <release>11</release>
+		    </configuration>
         </plugin>
         <plugin>
             <artifactId>maven-surefire-plugin</artifactId>
@@ -135,9 +135,7 @@
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>${jacoco.version}</version>
             <configuration>
-              <!-- <systemPropertyVariables>
-                  <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-               </systemPropertyVariables> -->
+               <destFile>target/jacoco.exec</destFile>
                <excludes>
                   <exclude>**/*App.*</exclude>
                </excludes>
@@ -175,6 +173,10 @@
                   <configuration>
                      <rules>
                         <rule>
+                           <element>CLASS</element>
+                           <excludes>
+                              <exclude>ie.lyit.ScriptedPipeline.App</exclude>
+                           </excludes>
                            <limits>
                               <limit>
                                  <counter>LINE</counter>
