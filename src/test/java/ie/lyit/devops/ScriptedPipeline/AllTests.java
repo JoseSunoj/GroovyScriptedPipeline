@@ -9,7 +9,7 @@ import org.junit.platform.suite.api.SelectPackages;
 import org.junit.runner.RunWith;
 
 @RunWith(JUnitPlatform.class)
-@SelectClasses({ TriangleTest.class })
+@SelectClasses({ TriangleTest.class, RightTriangleTest.class, AreaTest.class })
 @SelectPackages("ie.lyit.devops.ScriptedPipeline")
 /**
  * Test Suite
