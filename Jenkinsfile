@@ -1,9 +1,15 @@
 pipeline {
+    // any agent with label maven will be picked
     agent {
         node {
             label 'maven'    
         }
     }
+    // keeps only the last 5 build history
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+    }    
+    // declaring variables
     environment {
         CI = 'true'
         GITHUB_REPO = 'josesunoj/scriptedpipeline'
@@ -12,6 +18,7 @@ pipeline {
         ARTIFACTROY_ACCESS_KEY = credentials('artifactory-access-key')
 
     }
+    // supports for parameterised build
     parameters { 
         string(name: 'APP', defaultValue: 'triangle_app', description: 'The name of the sample application') 
         string(name: 'MAIL_ID', defaultValue: 'l00162972@student.lyit.ie', description: 'Email ID(s) of the developer(s)')
@@ -23,11 +30,15 @@ pipeline {
                 sh 'mvn compile'
             }
         }
+        // The test stage will be executed in parallel, 
+        // if a failure in any stage occurs, the remaining stages outside the parallel block will be skipped
         stage("Test") {
            
             failFast true
+            // the stages inside the parallel block will be executed in parallel
             parallel {
                 stage('Testing') {
+                    // this block will be executed sequentially
                     stages{
                         stage('Unit Test') {
                             steps {
@@ -43,6 +54,7 @@ pipeline {
                     
                 }
                 stage('Code Analysis') {
+                    // this block is also executed sequentially
                     stages {
                         stage('Code Scanning') {
                             steps {
@@ -63,7 +75,13 @@ pipeline {
                 }
             }
         }
+        
+        // this stage is executed only if the branch is the main
+        
         stage("Build and Push Image to Artifactory") {
+            
+            // any agent with a label docker will be picked
+            
             agent {
                 node {
                     label 'docker' 
@@ -94,6 +112,7 @@ pipeline {
                     }
                 }
             }
+            // ensures the user is loged out after the execution
             post('Log Out') {
                 always {
                     sh 'docker logout'
@@ -101,12 +120,13 @@ pipeline {
             }
         }
     }
+    // the developer will be notified in the event of a failure with logs attached
      post {
         failure {
-            emailext body: 'Pipeline Job Failures. Please Find The Attached Report.', 
-                compressLog: true, 
-                subject: 'Pipeline Job Failure Info.', 
-                to: params.MAIL_ID
+            emailext attachLog: true, body: '''Hi,
+                Pipeline Job $BUILD_NUMBER Failed. 
+                Please Find The Attached Report.
+                Thank you.''', compressLog: true, replyTo: 'no-reply', subject: '$JOB_NAME Job # $BUILD_NUMBER $BUILD_STATUS Info- ', to: 'l00162972@student.lyit.ie'
         }
     }
 }
