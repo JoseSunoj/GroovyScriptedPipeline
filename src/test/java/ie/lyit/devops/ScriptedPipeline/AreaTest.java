@@ -27,17 +27,17 @@ class AreaTest {
 	 */
 	@Test
 	void testFindArea() {
-		assertEquals(triangle.findArea(5, 4, 5), 9.17);
+		assertEquals(9.17, triangle.findArea(5, 4, 5));
 	}
 	
 	@Test
 	void testTwoFindArea() {
-		assertEquals(triangle.findArea(1, 4, 5), 0.0);
+		assertEquals(0.0, triangle.findArea(1, 4, 5));
 	}
 	
 	@Test
 	void testThreeFindArea() {
-		assertEquals(triangle.findArea(3000, 4000, 5000), 6000000.0);
+		assertEquals(6000000.0, triangle.findArea(3000, 4000, 5000));
 	}
 
 }
