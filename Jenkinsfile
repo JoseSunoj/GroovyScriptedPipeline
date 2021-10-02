@@ -14,7 +14,7 @@ pipeline {
     }
     parameters { 
         string(name: 'APP', defaultValue: 'triangle_app', description: 'The name of the sample application') 
-        string(name: 'MAIL_ID', defaultValue: '', description: 'Email ID(s) of the developer(s)')
+        string(name: 'MAIL_ID', defaultValue: 'l00162972@student.lyit.ie', description: 'Email ID(s) of the developer(s)')
     }
     stages {
         stage("Build") {
