@@ -9,7 +9,7 @@ pipeline {
         GITHUB_REPO = 'josesunoj/scriptedpipeline'
         ARTIFACTORY = 'sunojjose.jfrog.io'
         REGISTRY = 'sunojjose.jfrog.io/scripted-pipeline'
-        ARTIFACTROY_ACCESS_KEY = credentials('artifactory-access-key'
+        ARTIFACTROY_ACCESS_KEY = credentials('artifactory-access-key')
 
     }
     parameters { 
