@@ -10,6 +10,7 @@ pipeline {
         ARTIFACTORY = 'sunojjose.jfrog.io'
         REGISTRY = 'sunojjose.jfrog.io/scripted-pipeline'
         ARTIFACTROY_ACCESS_KEY = credentials('artifactory-access-key')
+        SONAR = 'org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155'
 
     }
     parameters { 
@@ -47,7 +48,7 @@ pipeline {
                         stage('Code Scanning') {
                             steps {
                                 withSonarQubeEnv(installationName: 'sonarqube') { 
-                                    sh 'mvn clean install org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+                                    sh 'mvn clean install $SONAR:sonar'
                                 }
                             }
                         }
