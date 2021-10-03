@@ -21,7 +21,7 @@ pipeline {
     // supports for parameterised build
     parameters { 
         string(name: 'APP', defaultValue: 'triangle_app', description: 'The name of the sample application') 
-        string(name: 'MAIL_ID', defaultValue: $DEFAULT_RECIPIENTS, description: 'Email ID(s) of the developer(s)')
+        string(name: 'MAIL_ID', defaultValue: '$DEFAULT_RECIPIENTS', description: 'Email ID(s) of the developer(s)')
     }
     stages {
         stage("Build") {
@@ -127,8 +127,8 @@ $PROJECT_NAME Job $BUILD_NUMBER Failed.
 Please Find The Attached Report.
 Thank you.''', 
                 compressLog: true, 
-                replyTo: $DEFAULT_REPLYTO, 
-                subject: '$JOB_NAME Job # $BUILD_NUMBER $BUILD_STATUS Info- ', 
+                replyTo: '$DEFAULT_REPLYTO', 
+                subject: '$JOB_NAME Job # $BUILD_NUMBER $BUILD_STATUS Info', 
                 to: params.MAIL_ID
         }
     }
