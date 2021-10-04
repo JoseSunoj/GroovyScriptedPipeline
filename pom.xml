@@ -95,7 +95,7 @@
           <configuration>
           	<archive>
           		<manifest>
-                	<mainClass>ie.lyit.ScriptedPipeline.App</mainClass>
+                	<mainClass>ie.lyit.devops.ScriptedPipeline.App</mainClass>
               	</manifest>
           	</archive>
           </configuration>
